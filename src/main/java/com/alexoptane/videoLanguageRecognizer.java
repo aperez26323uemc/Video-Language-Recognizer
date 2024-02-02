@@ -12,7 +12,7 @@ public class videoLanguageRecognizer {
 
     public static void main(String[] args) {
         // Ruta del archivo de video de entrada
-        String videoFilePath = "ruta/al/video/video.mp4";
+        String videoFilePath = "ruta/al/video/video.mkv";
 
         try {
             // Extraer pistas de audio y subtítulos (nombres)
@@ -78,7 +78,7 @@ public class videoLanguageRecognizer {
     private static void writeResultsToFile(String fileName, List<String> originalTracks, List<String> processedData, String trackType) throws IOException {
         try (FileWriter writer = new FileWriter(fileName)) {
             for (int i = 0; i < originalTracks.size(); i++) {
-                String resultLine = processedData.get(i) + " - " + originalTracks.get(i) + "; (pista de " + trackType + " " + (i + 1) + ")\n";
+                String resultLine = "Pista de " + trackType + " " + (i + 1) + "; " + processedData.get(i) + " - " + originalTracks.get(i) + "\n";
                 writer.write(resultLine);
             }
         }
