@@ -7,34 +7,37 @@ import java.util.List;
 
 public class videoLanguageRecognizer {
 
+    private static final String AUDIO_TRACKS_PREFIX = "audio-";
+    private static final String SUBTITLE_TRACKS_PREFIX = "subtitle-";
+
     public static void main(String[] args) {
         // Ruta del archivo de video de entrada
         String videoFilePath = "ruta/al/video/video.mp4";
 
         try {
-            // Extraer pistas de audio y subtítulos
+            // Extraer pistas de audio y subtítulos (nombres)
             List<String> audioTracks = extractAudioTracks(videoFilePath);
             List<String> subtitleTracks = extractSubtitleTracks(videoFilePath);
 
             // Transcribir audio a texto
             List<String> audioTexts = new ArrayList<>();
             for (String audioTrack : audioTracks) {
-                String audioText = transcribeAudioToText(audioTrack);
+                String audioText = transcribeAudioToText(AUDIO_TRACKS_PREFIX + audioTrack);
                 audioTexts.add(audioText);
-            }
-
-            // Detectar idioma de las pistas de subtítulos
-            List<String> subtitleLanguages = new ArrayList<>();
-            for (String subtitleTrack : subtitleTracks) {
-                String language = detectLanguage(subtitleTrack);
-                subtitleLanguages.add(language);
             }
 
             // Detectar idioma de las pistas de audio
             List<String> audioLanguages = new ArrayList<>();
             for (String audioTrack : audioTracks) {
-                String language = detectLanguage(audioTrack);
+                String language = detectLanguage(AUDIO_TRACKS_PREFIX + audioTrack);
                 audioLanguages.add(language);
+            }
+
+            // Detectar idioma de las pistas de subtítulos
+            List<String> subtitleLanguages = new ArrayList<>();
+            for (String subtitleTrack : subtitleTracks) {
+                String language = detectLanguage(SUBTITLE_TRACKS_PREFIX + subtitleTrack);
+                subtitleLanguages.add(language);
             }
 
             // Escribir resultados en archivos de texto
@@ -49,13 +52,13 @@ public class videoLanguageRecognizer {
     }
 
     private static List<String> extractAudioTracks(String videoFilePath) {
-        // Implementa la extracción de pistas de audio aquí
+        // Implementa la extracción de pistas de audio aquí, de forma que cada pista se convierta en un archivo con el nombre de la pista
         // Retorna una lista de nombres de pistas de audio
         return null; // Aquí debería ir la implementación real
     }
 
     private static List<String> extractSubtitleTracks(String videoFilePath) {
-        // Implementa la extracción de pistas de subtítulos aquí
+        // Implementa la extracción de pistas de subtítulos aquí, de forma que cada pista se convierta en un archivo con el nombre de la pista
         // Retorna una lista de nombres de pistas de subtítulos
         return null; // Aquí debería ir la implementación real
     }
